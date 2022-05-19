@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
@@ -18,7 +19,7 @@ class App extends React.Component {
           <Route path="/search" component={ Search } />
           <Route path="/album/:id" component={ Album } />
           <Route path="/favorites" component={ Favorites } />
-          <Route path="/profile" component={ Profile } />
+          <Route exact path="/profile" component={ Profile } />
           <Route path="/profile/edit" component={ ProfileEdit } />
           <Route path="*" component={ NotFound } />
         </Switch>
@@ -26,19 +27,6 @@ class App extends React.Component {
     );
   }
 }
-
+// App.propTypes = {
+// };
 export default App;
-
-//     stage = {
-//       Name: '',
-//       ButtonEnter: true,
-//     };
-//     button = () => {
-//   const { Name, ButtonEnter } = this.props;
-// if (Name.lenght >= 3){
-//   this.setState({
-//     ButtonEnter
-//   })
-// }
-
-// }
