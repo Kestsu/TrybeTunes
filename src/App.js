@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
@@ -27,6 +26,4 @@ class App extends React.Component {
     );
   }
 }
-// App.propTypes = {
-// };
 export default App;
