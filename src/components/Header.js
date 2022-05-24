@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './loading';
+import './style.css';
 
 class Header extends React.Component {
 state = {
@@ -22,72 +23,51 @@ componentDidMount() {
       user: objeto.name,
       isLoading: false,
     });
-    // console.log(this.props);
   }
-
-  // Search = () => {
-  //   const { history } = this.props;
-  //   history.push('/search');
-  // }
-
-  // Favorites = () => {
-  //   const { history } = this.props;
-  //   history.push('/favorites');
-  // }
-
-  // Profile = () => {
-  //   const { history } = this.props;
-  //   history.push('/profile');
-  // }
 
   render() {
     const { isLoading, user } = this.state;
     return (
-      <header data-testid="header-component">
-        {
-          (isLoading)
-            ? (
-              <Loading />
-            ) : (
-              <h1 data-testid="header-user-name">{user}</h1>
-            )
+      <header data-testid="header-component" className="header">
+        <div className="nome">
+          {
+            (isLoading)
+              ? (
+                <Loading />
+              ) : (
+                <h1 data-testid="header-user-name">{user}</h1>
+              )
+          }
+        </div>
+        <div className="links">
+          <Link
+            className="removeLine"
+            data-testid="link-to-search"
+            to="/search"
+          >
+            Search
 
-        }
-        <Link data-testid="link-to-search" to="/search">Search</Link>
-        <Link data-testid="link-to-favorites" to="/favorites">Favorites</Link>
-        <Link data-testid="link-to-profile" to="/profile">Profile</Link>
+          </Link>
+          <Link
+            className="removeLine"
+            data-testid="link-to-favorites"
+            to="/favorites"
+          >
+            Favorites
+
+          </Link>
+          <Link
+            className="removeLine"
+            data-testid="link-to-profile"
+            to="/profile"
+          >
+            Profile
+
+          </Link>
+        </div>
       </header>
     );
   }
 }
 
-// Header.propTypes = {
-//   history: PropTypes.func.isRequired,
-
-// };
-
 export default Header;
-
-/* <button
-  type="button"
-  data-testid="link-to-search"
-  onClick={ this.Search }
->
-  Search
-
-</button>
-<button
-  type="button"
-  data-testid="link-to-favorites"
-  onClick={ this.Favorites }
->
-  Favorites
-
-</button>
-<button
-  type="button"
-  data-testid="link-to-profile"
-  onClick={ this.Profile }
->
-  Profile
-</button> */

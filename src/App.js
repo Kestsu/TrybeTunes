@@ -7,16 +7,20 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
+import Title from './components/title';
 
 class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <h1>TrybeTunes</h1>
+        <Title />
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route path="/search" component={ Search } />
-          <Route path="/album/:id" component={ Album } />
+          <Route
+            path="/album/:id"
+            component={ Album }
+          />
           <Route path="/favorites" component={ Favorites } />
           <Route exact path="/profile" component={ Profile } />
           <Route path="/profile/edit" component={ ProfileEdit } />
