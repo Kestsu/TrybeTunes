@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import Loading from '../components/loading';
 import MusicCard from '../components/MusicCard';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
 state = {
@@ -13,10 +13,24 @@ state = {
   albumName: '',
   songs: [],
   favoritando: false,
+  favorites: [],
 }
 
-componentDidMount() {
+async componentDidMount() {
   this.handleMusic();
+  this.handleDownload();
+}
+
+handleDownload = async () => {
+  this.setState({
+    favoritando: true,
+  });
+  const atualizar = await getFavoriteSongs();
+  console.log(atualizar);
+  this.setState({
+    favoritando: false,
+    favorites: atualizar,
+  });
 }
 
 handleSinger = (arrayObject) => arrayObject[0].artistName
@@ -43,7 +57,7 @@ handleMusic = async () => {
     albumName: albumNome,
 
   });
-  console.log('getMusics', musicas);
+  // console.log('getMusics', musicas);
 }
 
 handleFavorite = (identificador) => {
@@ -54,7 +68,8 @@ handleFavorite = (identificador) => {
 
   onClick = async ({ target }) => {
     if (target.checked) {
-      console.log(target);
+      // console.log(target);
+      // target.checked = true;
       this.setState({ favoritando: true });
       const favorito = await this.handleFavorite(target.name);
       const resultado = await addSong(favorito);
@@ -62,6 +77,13 @@ handleFavorite = (identificador) => {
       return resultado;
       // console.log(favorito);
     //  return favorito;
+    }
+    if (target.checked === false) {
+      this.setState({ favoritando: true });
+      const favorito = await this.handleFavorite(target.name);
+      const resultado = await addSong(favorito);
+      this.setState({ favoritando: false });
+      return resultado;
     }
   }
 
@@ -82,20 +104,21 @@ handleFavorite = (identificador) => {
                 </div>
                 <div>
                   { (favoritando) ? (<Loading />)
-                    : (
-                      <div>
-                        {
-                          songs.map((item) => (<MusicCard
-                            key={ item.trackId }
-                            trackName={ item.trackName }
-                            previewUrl={ item.previewUrl }
-                            trackId={ item.trackId }
-                            onClick={ this.onClick }
-                            collectionName={ item.collectionName }
-                          />))
-                        }
-                      </div>
-                    ) }
+                    : ''}
+                </div>
+                <div>
+                  <div>
+                    {
+                      songs.map((item) => (<MusicCard
+                        key={ item.trackId }
+                        trackName={ item.trackName }
+                        previewUrl={ item.previewUrl }
+                        trackId={ item.trackId }
+                        apertar={ this.onClick }
+                        // checked={ checked }
+                      />))
+                    }
+                  </div>
                 </div>
               </div>
             )
