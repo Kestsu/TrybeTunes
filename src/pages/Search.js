@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Loading from '../components/loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import SingerCard from '../components/singerCard';
-import '../components/style.css';
+// import '../components/style.css';
 
 class Search extends React.Component {
   state = {
@@ -121,7 +121,8 @@ render() {
             ) : ''
           }
         </div>
-        <div className="items">
+        <div>
+          {/* className="items" */}
           {
             (apperPlaylist) ? (
               album.map((item) => (<SingerCard

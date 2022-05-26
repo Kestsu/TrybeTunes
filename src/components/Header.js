@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './loading';
-import './style.css';
+// import './style.css';
 
 class Header extends React.Component {
 state = {

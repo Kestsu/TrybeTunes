@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+// import './style.css';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
@@ -41,7 +41,8 @@ render() {
   const { trackName, previewUrl, trackId, apertar } = this.props;
   const { estado } = this.state;
   return (
-    <div className="item">
+    <div>
+      {/* className="item" */}
       <h4>{trackName}</h4>
       <audio data-testid="audio-component" src={ previewUrl } controls>
         <track kind="captions" />
