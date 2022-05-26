@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import Loading from '../components/loading';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
 state = {
@@ -13,24 +13,11 @@ state = {
   albumName: '',
   songs: [],
   favoritando: false,
-  favorites: [],
+  estado: false,
 }
 
 async componentDidMount() {
   this.handleMusic();
-  this.handleDownload();
-}
-
-handleDownload = async () => {
-  this.setState({
-    favoritando: true,
-  });
-  const atualizar = await getFavoriteSongs();
-  console.log(atualizar);
-  this.setState({
-    favoritando: false,
-    favorites: atualizar,
-  });
 }
 
 handleSinger = (arrayObject) => arrayObject[0].artistName
@@ -62,33 +49,29 @@ handleMusic = async () => {
 
 handleFavorite = (identificador) => {
   const { songs } = this.state;
-  const selecionado = songs.filter((item) => (item.trackName === identificador));
+  const numero = JSON.parse(identificador);
+  const selecionado = songs.find((item) => (item.trackId === numero));
   return selecionado;
 }
 
-  onClick = async ({ target }) => {
+  onClick = async (target) => {
     if (target.checked) {
-      // console.log(target);
-      // target.checked = true;
-      this.setState({ favoritando: true });
-      const favorito = await this.handleFavorite(target.name);
+      this.setState({
+        favoritando: true,
+        estado: true,
+      });
+      console.log('chamou onClick');
+      const favorito = await this.handleFavorite(target.id);
       const resultado = await addSong(favorito);
-      this.setState({ favoritando: false });
-      return resultado;
-      // console.log(favorito);
-    //  return favorito;
-    }
-    if (target.checked === false) {
-      this.setState({ favoritando: true });
-      const favorito = await this.handleFavorite(target.name);
-      const resultado = await addSong(favorito);
-      this.setState({ favoritando: false });
+      this.setState({
+        favoritando: false,
+      });
       return resultado;
     }
   }
 
   render() {
-    const { isLoading, singer, albumName, songs, favoritando } = this.state;
+    const { isLoading, singer, albumName, songs, favoritando, estado } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
@@ -115,7 +98,7 @@ handleFavorite = (identificador) => {
                         previewUrl={ item.previewUrl }
                         trackId={ item.trackId }
                         apertar={ this.onClick }
-                        // checked={ checked }
+                        trueFalse={ estado }
                       />))
                     }
                   </div>
