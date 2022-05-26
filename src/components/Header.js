@@ -29,7 +29,8 @@ componentDidMount() {
     const { isLoading, user } = this.state;
     return (
       <header data-testid="header-component" className="header">
-        <div className="nome">
+        <div>
+          {/* className="nome" */}
           {
             (isLoading)
               ? (
@@ -39,9 +40,10 @@ componentDidMount() {
               )
           }
         </div>
-        <div className="links">
+        <div>
+          {/* className="links" */}
           <Link
-            className="removeLine"
+            // className="removeLine"
             data-testid="link-to-search"
             to="/search"
           >
@@ -49,7 +51,7 @@ componentDidMount() {
 
           </Link>
           <Link
-            className="removeLine"
+            // className="removeLine"
             data-testid="link-to-favorites"
             to="/favorites"
           >
@@ -57,7 +59,7 @@ componentDidMount() {
 
           </Link>
           <Link
-            className="removeLine"
+            // className="removeLine"
             data-testid="link-to-profile"
             to="/profile"
           >

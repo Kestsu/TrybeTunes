@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './style.css';
+// import './style.css';
 
 class SingerCard extends React.Component {
   render() {
     const { artistName, collectionId, image, collectionName } = this.props;
     return (
-      <div className="item">
+      <div>
+        {/* className="item" */}
         <h4>{collectionName}</h4>
         <img
           src={ image }
